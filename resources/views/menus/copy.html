@@ -1,0 +1,611 @@
+//copy create
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tambah Menu</title>
+        <style> 
+            /* Umum */
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(135deg, #f6e4ba, #ffdeb8);
+                color: #333;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            header {
+                background: linear-gradient(to right, #8c4b31, #f77f00);
+                color: #fff;
+                padding: 20px;
+                width: 100%;
+                text-align: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+    
+            h1 {
+                font-size: 2.5rem;
+                margin: 0;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+    
+            /* Form Style */
+            main {
+                background: #ffffff;
+                border: 2px solid #8c4b31;
+                border-radius: 15px;
+                padding: 30px;
+                margin: 20px;
+                width: 100%;
+                max-width: 600px;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                animation: fadeInUp 0.6s ease-in-out;
+                background: radial-gradient(circle, #ffe8d6, #fcbf49);
+            }
+    
+            label {
+                font-size: 1.2rem;
+                display: block;
+                margin-bottom: 10px;
+                color: #8c4b31;
+                font-weight: bold;
+            }
+    
+            input[type="text"],
+            input[type="number"],
+            textarea {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                border: 2px solid #8c4b31;
+                background-color: #fff;
+                font-size: 1rem;
+                transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+    
+            input[type="text"]:focus,
+            input[type="number"]:focus,
+            textarea:focus {
+                outline: none;
+                border-color: #f77f00;
+                box-shadow: 0 0 8px rgba(247, 127, 0, 0.5);
+            }
+    
+            textarea {
+                resize: vertical;
+                min-height: 100px;
+            }
+    
+            .button {
+                background: linear-gradient(to right, #fcbf49, #f77f00);
+                color: #fff;
+                padding: 12px 25px;
+                text-decoration: none;
+                border-radius: 8px;
+                transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+                margin-right: 10px;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            }
+    
+            .button:hover {
+                background: linear-gradient(to right, #f77f00, #ff5722);
+                transform: translateY(-3px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            }
+    
+            .cancel {
+                background: linear-gradient(to right, #d62828, #b21818);
+            }
+    
+            .cancel:hover {
+                background: linear-gradient(to right, #b21818, #a70000);
+            }
+    
+            /* Animasi */
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                40% { transform: translateY(-30px); }
+                60% { transform: translateY(-15px); }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>PILIH MENU FAVORITMU</h1>
+        </header>
+        <main>
+            <form action="{{ route('menus.store') }}" method="POST">
+                @csrf
+                <div>
+                    <label for="name">Nama</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="price">Porsi</label>
+                    <input type="number" id="price" name="price" required>
+                </div>
+                <div>
+                    <label for="description">Deskripsi</label>
+                    <textarea id="description" name="description"></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="button">Tambah Menu</button>
+                    <a href="{{ route('menus.index') }}" class="button cancel">Batal</a>
+                </div>
+            </form>
+        </main>
+    </body>
+    </html>
+    
+    //index copy
+    {{-- <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Daftar Menu</title>
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        </head>
+        <body>
+            <style>
+            /* Umum */
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #faf3e0;
+                color: #333;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        
+            header {
+                background-color: #8c4b31;
+                color: #fff;
+                padding: 20px;
+                width: 100%;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        
+            h1 {
+                font-size: 2.5rem;
+                margin: 0;
+            }
+        
+            .button {
+                background-color: #fcbf49;
+                color: #333;
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: %px;
+                transition: background-color 0.3s ease-in-out;
+                margin-top: 10px;
+            }
+        
+            .button:hover {
+                background-color: #f77f00;
+            }
+        
+            .cancel {
+                background-color: #d62828;
+                color: #fff;
+            }
+        
+            .cancel:hover {
+                background-color: #b21818;
+            }
+        
+            /* Daftar Menu */
+            .menu-list {
+                list-style-type: none;
+                padding: 0;
+                margin: 20px 0;
+                width: 100%;
+                max-width: 600px;
+            }
+        
+            .menu-item {
+                background-color: #ffe8d6;
+                border: 2px solid #8c4b31;
+                border-radius: 10px;
+                padding: 20px;
+                margin-bottom: 15px;
+                transition: transform 0.2s ease-in-out;
+            }
+        
+            .menu-item:hover {
+                transform: scale(1.03);
+            }
+        
+            .menu-item h2 {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+        
+            .menu-item p {
+                margin: 5px 0;
+            }
+        
+            /* Animasi */
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        
+            .menu-item {
+                animation: fadeIn 0.5s ease-in-out;
+            }
+        
+            .menu-item:nth-child(odd) {
+                animation-delay: 0.2s;
+            }
+        
+            .menu-item:nth-child(even) {
+                animation-delay: 0.4s;
+            }
+        
+            /* Fitur Pencarian */
+            .search-bar {
+                margin: 20px 0;
+                max-width: 600px;
+                width: 100%;
+                display: flex;
+            }
+        
+            .search-bar input[type="text"] {
+                width: 100%;
+                padding: 10px;
+                border: 2px solid #8c4b31;
+                border-radius: 5px;
+                font-size: 1rem;
+            }
+        
+            .search-bar button {
+                background-color: #fcbf49;
+                color: #333;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                margin-left: 10px;
+                cursor: pointer;
+                transition: background-color 0.3s ease-in-out;
+            }
+        
+            .search-bar button:hover {
+                background-color: #f77f00;
+            }
+        
+            /* Pesan Kosong */
+            .empty-message {
+                font-size: 1.2rem;
+                color: #8c4b31;
+                text-align: center;
+                margin: 40px 0;
+            }
+        
+            </style>
+        
+            <header>
+                <h1>ANGKRINGAN JYOGJYA</h1>
+                <a href="{{ route('menus.create') }}" class="button">Tambah Menu</a>
+            </header>
+            
+            <!-- Fitur Pencarian -->
+            <div class="search-bar">
+                <input type="text" placeholder="Cari menu...">
+                <button type="button">Cari</button>
+            </div>
+        
+            <main>
+                <!-- Cek apakah ada menu -->
+                @if ($menus->isEmpty())
+                    <p class="empty-message">Belum ada menu yang tersedia.</p>
+                @else
+                    <ul class="menu-list">
+                        @foreach ($menus as $menu)
+                            <li class="menu-item">
+                                
+                                <h2>Ayam Bakar{{ $menu->name }}</h2>
+                                <p>Harga: Rp. 30,000 {{ $menu->price }}</p>
+                                <p> Ayam Bakar khas Jogja{{ $menu->description }}</p>
+                                <a href="{{ route('menus.edit', $menu) }}" class="button">Ubah</a>
+                                
+                                <form action="{{ route('menus.destroy', $menu) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="button cancel">Hapus</button>
+                                </form>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+            </main>
+        </body>
+        </html> --}}
+        
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Daftar Menu</title>
+            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        </head>
+        <body class="bg-yellow-100 text-gray-800 flex flex-col items-center">
+            <header class="bg-brown-800 text-white py-5 w-full text-center flex flex-col items-center">
+                <h1 class="text-3xl font-bold">ANGKRINGAN JYOGJYA</h1>
+                <a href="{{ route('menus.create') }}" class="bg-yellow-400 text-gray-800 py-2 px-4 rounded mt-3 transition duration-300 hover:bg-yellow-500">Tambah Menu</a>
+            </header>
+            
+            <!-- Fitur Pencarian -->
+            <div class="search-bar mt-5 max-w-md w-full flex">
+                <input type="text" placeholder="Cari menu..." class="w-full p-2 border-2 border-brown-800 rounded-l text-lg">
+                <button type="button" class="bg-yellow-400 text-gray-800 py-2 px-4 rounded-r transition duration-300 hover:bg-yellow-500">Cari</button>
+            </div>
+        
+            <main class="mt-10 w-full max-w-md">
+                <!-- Cek apakah ada menu -->
+                @if ($menus->isEmpty())
+                    <p class="text-center text-brown-800 text-lg">Belum ada menu yang tersedia.</p>
+                @else
+                    <ul class="space-y-4">
+                        @foreach ($menus as $menu)
+                            <li class="bg-yellow-200 border-2 border-brown-800 rounded p-5 transform transition duration-200 hover:scale-105">
+                                <h2 class="text-2xl font-bold mb-2">{{ $menu->name }}</h2>
+                                <p class="mb-2">Harga: Rp. {{ number_format($menu->price, 0, ',', '.') }}</p>
+                                <p class="mb-4">{{ $menu->description }}</p>
+                                <a href="{{ route('menus.edit', $menu) }}" class="bg-yellow-400 text-gray-800 py-2 px-4 rounded transition duration-300 hover:bg-yellow-500">Ubah</a>
+                                
+                                <form action="{{ route('menus.destroy', $menu) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded ml-2 transition duration-300 hover:bg-red-700">Hapus</button>
+                                </form>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+
+            </main>
+        </body>
+        </html>
+        <!-- Fitur Pencarian -->
+    <div class="search-bar mt-5 max-w-md w-full flex">
+        <input type="text" id="search-input" placeholder="Cari menu..." class="w-full p-2 border-2 border-brown-800 rounded-l text-lg">
+        <button type="button" class="bg-yellow-400 text-gray-800 py-2 px-4 rounded-r transition duration-300 hover:bg-yellow-500">Cari Menu..</button>
+        <ul id="list">
+
+//copy checkout.blade.php
+{!! QrCode::size(200)->generate("Pembayaran Angkringan Jogja sebesar Rp. $totalPriceFormatted") !!}
+<!DOCTYPE html> 
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Angkringan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/@zxing/library@latest/dist/index.min.js"></script>
+  <script src="{{ asset('js/scan.js') }}"></script>
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .fadeIn {
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .bounceIn {
+            animation: bounceIn 0.6s ease-out;
+        }
+
+        .button-animated:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-orange-50 text-gray-900 flex flex-col items-center font-serif min-h-screen">
+    <header class="bg-yellow-800 text-white py-5 w-full text-center flex flex-col items-center shadow-lg animate-slideIn">
+        <h1 class="text-4xl font-bold mb-2">Checkout Angkringan Jogja</h1>
+        <p class="mt-2 text-sm italic">Hidangan sederhana, rasa luar biasa</p>
+    </header>
+    
+    <main class="mt-10 w-full max-w-md p-4">
+        <form action="{{ route('checkout.store') }}" method="POST">
+        <form action="{{ route('checkout.store') }}" method="POST" class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 bounceIn">
+            @csrf
+            
+            <!-- Menampilkan Pesanan -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold mb-4 text-yellow-800">Pesanan Anda:</h2>
+                @if (session('cart') && count(session('cart')) > 0)
+                    @php
+                        $cart = session('cart');
+                        $totalPrice = array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $cart));
+                        $totalPriceFormatted = number_format($totalPrice, 0, ',', '.');
+                    @endphp
+                    @foreach($cart as $item)
+                        <div class="mb-2 flex justify-between text-sm text-gray-700">
+                            <span>{{ $item['name'] }} x {{ $item['quantity'] }}</span>
+                            <span>Rp. {{ number_format($item['price'] * $item['quantity'], 0, ',', '.') }}</span>
+                        </div>
+                    @endforeach
+                    <div class="mt-4 text-xl font-bold flex justify-between text-yellow-800">
+                        <span>Total:</span>
+                        <span>Rp. {{ $totalPriceFormatted }}</span>
+                    </div>
+                @else
+                    <p class="text-center text-red-600 text-lg">Keranjang Anda kosong.</p>
+                @endif
+            </div>
+            
+            <!-- Alamat Pengiriman -->
+            <div class="mb-6">
+                <label for="address" class="block text-gray-700 text-sm font-bold mb-2">Alamat Pengiriman:</label>
+                <textarea id="address" name="address" required class="shadow appearance-none border border-yellow-800 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"></textarea>
+            </div>
+
+            <!-- QR Code Pembayaran -->
+            {{-- @if(session('cart') && count(session('cart')) > 0)
+                <div class="mb-6 text-center">
+                    <h3 class="text-lg font-bold mb-2 text-yellow-800">Scan untuk Membayar</h3>
+                    <div class="flex justify-center">
+                    {!! QrCode::size(200)->generate("Pembayaran Angkringan Jogja sebesar Rp. $totalPriceFormatted") !!}
+                    <br>
+                    <p class="mt-2 text-sm text-gray-600">Gunakan aplikasi pembayaran untuk memindai QR Code ini.</p>
+                </div>
+            @endif --}}
+
+            <!-- QR Code Pembayaran --> 
+            @if(session('cart') && count(session('cart')) > 0)
+            <div class="mb-6 text-center">
+                <h3 class="text-lg font-bold mb-2 text-yellow-800">Scan untuk Membayar</h3>
+                <p class="text-sm text-gray-600 mb-4">Gunakan aplikasi pembayaran untuk memindai QR Code ini.</p>
+                <div class="flex justify-center">
+                    {!! QrCode::size(200)->generate(route('thankyou')) !!} 
+        </div>
+        </div>
+        @endif
+
+            
+            <!-- Tombol Bayar dan Kembali -->
+            <div class="flex items-center justify-between mt-6">
+                <button type="submit" class="bg-yellow-800 text-white py-2 px-4 rounded shadow-md transition-transform transform hover:bg-yellow-700 hover:-translate-y-1 hover:scale-105 duration-300 button-animated">Bayar</button>
+                <a href="{{ route('menus.index') }}" class="bg-yellow-800 text-white py-2 px-4 rounded shadow-md transition-transform transform hover:bg-yellow-700 hover:-translate-y-1 hover:scale-105 duration-300 button-animated">Kembali ke Menu</a>
+            </div>
+        </form>
+    </main>
+
+            <!--Area Pemindaian QR Code-->
+            {{-- <div id="scanner-container" class="fixed top-0 left-0 w-10 h-10 bg-black bg-opacity-50-flex items-center justify-center z-50 hidden">
+                <div id="scanner" class="w-4/5 h-4/5 bg-white border border-yellow-800 rounded"></div>
+            </div> --}}
+
+            <div id="scanner-container" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50-flex items-center justify-center z-50 hidden">
+                <div id="scanner" class="w-4/5 h-4/5 bg-white border border-yellow-800 rounded"></div>
+                <button onclick="closeScanner()" class="absolute top-2 right-2 bg-yellow-800 text-white py-1 px-3 rounded">Tutup</button>
+            </div>
+        
+    <!-- QuaggaJS script untuk pemindaian barcode, jika diperlukan -->
+    <script src="https://unpkg.com/quagga/dist/quagga.min.js"></script>
+    <script>
+       // Fungsi untuk membuka kamera pemindai
+       function openScanner() {
+        document.getElementById('scanner-container').classList.remove('hidden');
+        Quagga.init({
+        inputStream: {
+            type: "LiveStream",
+            target: document.querySelector('#scanner'),
+            constraints: {
+                facingMode: "environment" // Gunakan kamera belakang
+            }
+        },
+        decoder: {
+            readers: ["qr_reader"]
+        }
+        }, function(err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        Quagga.start();
+    });
+}
+
+    // Fungsi untuk menutup kamera pemindai
+    function closeScanner() {
+        Quagga.stop();
+        document.getElementById('scanner-container').classList.add('hidden');
+}
+
+    // Mendapatkan hasil scan
+    Quagga.onDetected(function(result) {
+        var code = result.codeResult.code;
+        document.getElementById('barcode-result').value = code;
+    
+    // Arahkan ke halaman terima kasih setelah QR Code terdeteksi
+        window.location.href = "{{ route('thankyou') }}";
+        closeScanner();
+
+        const { BrowserMultiFormatReader } = ZXing;
+        
+        function openScanner() {
+            document.getElementById('scanner-container').classList.remove('hidden');
+            const codeReader = new BrowserMultiFormatReader();
+            codeReader.decodeFromVideoDevice(null, 'scanner', (result, error) => {
+                if (result) {
+                document.getElementById('scanner-container').classList.add('hidden');
+
+         // Setelah QR Code terdeteksi, arahkan pengguna ke halaman terima kasih
+        window.location.href = "{{ route('thankyou') }}";
+        }
+        if (error) {
+            console.error(error);
+        }
+    });
+}});
+
+    // Buka kamera saat halaman dimuat (atau sesuai kebutuhan)
+    openScanner(); // Uncomment untuk membuka kamera secara otomatis
+   
+    </script>
+</body>
+</html>
+
+//checkourt qr_reader
+ <!-- QR Code Pembayaran -->
+{{-- @if(session('cart') && count(session('cart')) > 0)
+    <div class="mb-6 text-center">
+        <h3 class="text-lg font-bold mb-2 text-yellow-800">Scan untuk Membayar</h3>
+        <div class="flex justify-center">
+        {!! QrCode::size(200)->generate("Pembayaran Angkringan Jogja sebesar Rp. $totalPriceFormatted") !!}
+        <br>
+        <p class="mt-2 text-sm text-gray-600">Gunakan aplikasi pembayaran untuk memindai QR Code ini.</p>
+        <p class="mt-2 text -sm text-gray-600"> gunakan aplikasi pembayaran untuk memindai  QR Code ini,
+
+        </p>
+    </div>
+@endif --}}
+ //checkout 
+ 
+            <!--Area Pemindaian QR Code-->
+            {{-- <div id="scanner-container" class="fixed top-0 left-0 w-10 h-10 bg-black bg-opacity-50-flex items-center justify-center z-50 hidden">
+                <div id="scanner" class="w-4/5 h-4/5 bg-white border border-yellow-800 rounded"></div>
+              <!--   tambahan -->
+                <div id="scannerr-container" class="fixed top-0 left-0 w-10 h-10 bg-black bg-opacity-50-flex items-center justify-center z-50 hidden"></div>
+                <div id="scanner" class="w-4/5 h-4/5 bg-white border-yellow-800 rounded"></div>
+            </div> --}}
+
