@@ -8,7 +8,7 @@
 </head>
 <body class="bg-yellow-200 text-gray-800 flex flex-col items-center">
     <header class="bg-brown-800 text-white py-5 w-full text-center animate-slide-in-down">
-        <h1 class="text-3xl font-bold">PILIH MENU FAVORITMU</h1>
+        <h1 class="text-3xl font-bold">TAMBAH MENU FAVORITMU</h1>
     </header>
     <main class="bg-yellow-200 border-2 border-brown-800 rounded-lg p-8 mt-10 w-full max-w-md shadow-lg animate-fade-in-up">
         <form action="{{ route('menus.store') }}" method="POST">

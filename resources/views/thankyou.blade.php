@@ -14,7 +14,7 @@
     
     <main class="mt-10 w-full max-w-md p-4">
         <div class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 text-center animate-bounceIn">
-            <p class="text-lg font-bold mb-4 text-yellow-600">Terima kasih telah melakukan pembayaran di Angkringan Jogja!</p>
+            <p class="text-lg font-bold mb-4 text-yellow-600">Terima kasih telah melakukan pembayaran di REN'AI KEISEKI!</p>
             <p class="text-gray-700">Kami akan segera memproses pesanan Anda. Jika Anda memiliki pertanyaan, jangan ragu untuk menghubungi kami.</p>
             <a href="{{ route('menus.index') }}" class="bg-yellow-600 text-white py-2 px-4 rounded shadow-md mt-6 inline-block transition-transform transform hover:scale-105 duration-300 hover:bg-yellow-500">Kembali ke Menu</a>
         </div>

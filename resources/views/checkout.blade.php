@@ -10,8 +10,8 @@
 </head>
 <body class="bg-orange-50 text-gray-900 flex flex-col items-center font-serif min-h-screen">
     <header class="bg-yellow-800 text-white py-5 w-full text-center flex flex-col items-center shadow-lg animate-slideInDown">
-        <h1 class="text-4xl font-bold mb-2 animate-pulse">Checkout Angkringan Jogja</h1>
-        <p class="mt-2 text-sm italic animate-bounce">Hidangan sederhana, rasa luar biasa</p>
+        <h1 class="text-4xl font-bold mb-2 animate-pulse">Checkout REN'AI KEISEKI</h1>
+        <p class="mt-2 text-sm italic animate-bounce">Hidangan sederhana, Rasa luar biasa</p>
     </header>
 
     <main class="mt-10 w-full max-w-md p-4">

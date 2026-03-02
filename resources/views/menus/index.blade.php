@@ -8,7 +8,7 @@
 </head>
 <body class="bg-yellow-100 text-gray-800 flex flex-col items-center">
     <header class="bg-brown-800 text-white py-5 w-full text-center flex flex-col items-center">
-        <h1 class="text-3xl font-bold">ANGKRINGAN JYOGJYA</h1>
+        <h1 class="text-4xl font-bold text-yellow-500 drop-shadow-md">REN'AI KAISEKI</h1>
         <a href="{{ route('menus.create') }}" class="bg-yellow-400 text-gray-800 py-2 px-4 rounded mt-3 transition duration-300 hover:bg-yellow-500">Tambah Menu</a>
     </header>
     
@@ -19,7 +19,7 @@
     </div>
 
     <main class="mt-10 w-full max-w-md">
-        <!-- Cek apakah ada menu -->
+        <!-- Cek menu -->
         @if ($menus->isEmpty())
           <p class="text-center text-brown-800 text-lg">Belum ada menu yang tersedia</p>
         @else
